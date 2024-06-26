@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "vehicle-info-web.fullname" . }}
+  labels:
+    {{- include "vehicle-info-web.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+    {{- include "vehicle-info-web.selectorLabels" . | nindent 6 }}
+{{ toYaml .Values.podDisruptionBudget | indent 2 }}
