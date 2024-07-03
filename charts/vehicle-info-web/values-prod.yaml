@@ -1,0 +1,63 @@
+replicaCount: 2
+image:
+  repository: dimozone/vehicle-info-web
+  pullPolicy: IfNotPresent
+  tag: efc8ee3
+imagePullSecrets: []
+nameOverride: ''
+fullnameOverride: ''
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ''
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+env:
+NODE_ENV: dev
+  PORT: '8080'
+  LOG_LEVEL: info
+  DIMO_IDENTITY_API: https://identity-api.dimo.zone
+service:
+  type: ClusterIP
+  ports:
+    http:
+      port: 8080
+      targetPort: http
+      protocol: TCP
+ports:
+  - name: http
+    containerPort: 8080
+    protocol: TCP
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-secret: ingress/cf-origin-ca
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: 'on'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/cors-allow-origin: https://vehicle-info.dimo.zone
+    external-dns.alpha.kubernetes.io/hostname: vehicle-info.dimo.zone
+  hosts:
+    - host: vehicle-info.dimo.zone
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+nodeSelector: {}
+tolerations: []
+affinity: {}
+podDisruptionBudget:
+  minAvailable: 1
