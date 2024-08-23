@@ -171,7 +171,7 @@ app.post('/fetchRewardsHistory', async (req, res) => {
         }
 
         if (responseData.data && responseData.data.vehicle) {
-            return res.json(responseData.data.vehicle.earnings.history);
+            return res.json(responseData.data.vehicle.earnings);
         } else {
             return res.status(404).json({ error: 'No rewards history found for the given token ID.' });
         }
@@ -181,15 +181,95 @@ app.post('/fetchRewardsHistory', async (req, res) => {
     }
 });
 
+app.get('/searchDeviceDefinitions', async (req, res) => {
+    const { query } = req.query;
+
+    if (!query) {
+        return res.status(400).json({ error: 'Query is required' });
+    }
+
+    try {
+        const response = await axios.get(process.env.DEVICE_DEFINITIONS_API_URL, {
+            params: { query },
+        });
+
+        if (response.status !== 200) {
+            return res.status(response.status).json({ error: 'Error fetching device definitions' });
+        }
+
+        return res.json(response.data.items);
+    } catch (error) {
+        console.error('Autocomplete search error:', error);
+        return res.status(500).json({ error: error.message });
+    }
+});
+
+
 app.get('/token/:tokenId', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'UP' });
 });
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-app.get('/health', (req, res) => {
-    res.status(200).json({ status:'UP'});
+app.post('/fetchGraphQL', async (req, res) => {
+    const { query } = req.body;
+    
+    try {
+        const response = await axios.post(process.env.DIMO_API_URL, { query }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        });
+        res.json(response.data);
+    } catch (error) {
+        console.error('GraphQL error:', error);
+        res.status(500).json({ error: 'Failed to fetch data' });
+    }
+});
+app.post('/fetchTokenIds', async (req, res) => {
+    const { definitionId } = req.body;
+    console.log('Received Definition ID:', definitionId);
+
+    const query = `
+        query {
+            vehicles(first: 100, filterBy: { deviceDefinitionId: ${definitionId} }) {
+                nodes {
+                    tokenId
+                }
+            }
+        }
+    `;
+
+    try {
+        const response = await axios.post(process.env.DIMO_API_URL, { query }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        });
+
+        const responseData = response.data;
+        if (responseData.errors) {
+            console.error('GraphQL errors:', responseData.errors);
+            return res.status(500).json({ errors: responseData.errors });
+        }
+
+        if (responseData.data && responseData.data.vehicles) {
+            return res.json(responseData.data.vehicles.nodes);
+        } else {
+            return res.status(404).json({ error: 'No tokens found for the given definition ID.' });
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+        return res.status(500).json({ error: error.message });
+    }
 });
 

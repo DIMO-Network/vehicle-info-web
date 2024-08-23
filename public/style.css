@@ -1,167 +1,296 @@
-/* style.css */
 body {
-    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #fafafa;
+    font-family: 'IBM Plex Mono', 'Inter', sans-serif;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #000;  
-    color: #fff;  
-    margin: 0;
-}
-
-.logo-container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.logo-container img {
-    height: 60px; /* Adjust as needed */
-}
-
-.container {
-    background: #1e1e1e;  
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);  
-    text-align: center;
-    max-width: 400px;  
-    width: 100%;
-    position: relative; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px; 
-}
-
-h1 {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 2em;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden; 
+    transform: scale(0.91);
+    transform-origin: top center; 
 }
 
-h2 {
-    margin-bottom: 20px;
-    font-size: 1.5em; 
-}
 
-h2 i {
-    margin-left: 10px; 
-}
 
-h2.beta {
-    margin-top: -10px; 
-    font-size: 1em;
-    color: #ccc; 
-}
-
-h1 i {
-    margin-right: 10px; 
-}
-
-input {
-    padding: 10px;
-    margin-bottom: 10px;
+header {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
+    padding: 0;
+    margin-bottom: 1px;
     box-sizing: border-box;
-    border: 1px solid #444;  
-    border-radius: 4px;
-    background-color: #333;  
-    color: #fff;  
+}
+
+.dimo-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 0px;
+    margin-top: 15px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+    box-sizing: border-box;
+    margin-top: -2rem;
+}
+
+main h1 {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #fff;
+    line-height: 1.2;
+}
+
+main p {
+    color: #888;
+    margin-top: 1rem;
+}
+
+input[type="text"] {
+    width: calc(100% - 2px);
+    padding: 0.5rem;
+    background-color: #000;
+    border: 1px solid #888;
+    border-radius: 0.375rem;
+    color: #fff;
+    box-sizing: border-box;
+    margin-bottom: 0.5rem;
 }
 
 button {
-    padding: 10px;
-    width: 100%;
+    width: calc(100% - 2px);
+    padding: 0.75rem;
+    background-color: #000;
+    border: 1px solid #666;
+    border-radius: 0.375rem;
+    color: #fafafa;
+    font-weight: 500;
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
     box-sizing: border-box;
-    background: #007BFF; 
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.3s ease;  
-    margin-bottom: 15px; 
 }
 
 button:hover {
-    background: #0056b3; 
+    background-color: #333;
+    border-color: #888;
 }
 
-#carData {
-    margin-top: 20px;
-    text-align: left;
+button i {
+    margin-right: 0.5rem;
 }
 
-#carData p {
-    margin: 0 0 10px;  
+#errorMessage {
+    color: #ff6b6b;
+    margin-top: 0.5rem;
 }
 
-#carData h2 {
-    margin-top: 0;
+.data-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 10px;
+    font-size: 0.9em;
+    min-width: 150px;  
+    max-width: 150px;  
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 400px; 
+}
+
+
+
+.car-data-container,
+.advanced-car-data,
+.rewards-history-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #09090b;
+    border: 1px solid #333;
+    border-radius: 0.375rem;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+
+.car-data-container h2,
+.advanced-car-data h2,
+.rewards-history-container h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+
+.car-data-container p,
+.advanced-car-data p,
+.rewards-history-container p {
+    margin: 0;
+}
+
+.car-data-container a.icon-link {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+
+
+.car-data-container .back-button {
+    display: inline-block;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    padding: 0.75rem;
+    background-color: #000;
+    border: 1px solid #666;
+    border-radius: 0.375rem;
+    color: #fafafa;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.car-data-container .back-button:hover {
+    background-color: #333;
+    border-color: #888;
+}
+
+
+
+.autocomplete-list {
+    list-style-type: none;
+    padding-left: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #09090b;
+    border: 1px solid #444;
+    border-radius: 5px;
+    margin-top: 5px;
+    display: none;
+}
+
+.autocomplete-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.autocomplete-list li:hover {
+    background-color: #333;
+}
+
+.autocomplete-item {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #444;
+}
+
+.autocomplete-item:hover {
+    background-color: #333;
+}
+
+.autocomplete-list {
+    display: block;
+}
+
+.search-result-title {
+    color: #888;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.button-group button.active {
+    background-color: #555;
+    color: #000;
+}
+
+
+
+.share-button, .polygon-button {
+    background: transparent;
+    border: 1px solid #666;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 100px;
+    height: 45px;
+    margin: 0 auto;
 }
 
 .share-button {
-    font-size: 0.8em;  
-    padding: 5px 10px;  
-    height: auto;  
-    width: 100%; 
-    margin-top: 15px; 
+    margin-right: -75px; 
 }
 
-.fa-twitter {
-    display: block;
-    font-size: 24px;
-    color: #007BFF; 
-    margin: 20px auto 0; 
-    text-align: center;
-    transition: color 0.3s ease;
+.share-button i {
+    font-size: 1.5rem;
+    color: #1DA1F2;
 }
 
-.fa-twitter:hover {
-    color: #0056b3; 
+.polygon-button i {
+    font-size: 1.5rem;
+    color: #8E44AD; 
 }
 
-a.icon-link {
-    color: #007BFF; 
-    text-decoration: none;
-    font-size: 26px; 
+.share-button:hover, .polygon-button:hover {
+    background-color: #333;
+    border-color: #888;
+}
+.github-button {
+    position: absolute;
+    top: 10px;
+ 
+    right: 420px;
+    margin-top: 55px;
+    margin-right: 15px;
+    background: transparent;
+    border: 1px solid #666;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
 }
 
-.advanced-car-data {
-    margin-top: 20px;
-    padding: 20px;
-    background: #1e1e1e;  
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);  
-    text-align: left;
-    max-width: 400px; 
-    display: none;  
+.github-button i {
+    font-size: 1.5rem;
+    color: #fafafa;
 }
 
-@media (max-width: 415px) {
-    .container {
-        max-width: 100%; 
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-
-    h2 {
-        font-size: 1.2em;
-    }
-
-    .share-button {
-        width: auto; 
-        margin-top: 10px;
-    }
-
-    .advanced-car-data {
-        margin-top: 10px;
-        max-width: 100%;
-    }
+.github-button:hover {
+    background-color: #333;
+    border-color: #888;
 }
