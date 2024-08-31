@@ -224,108 +224,110 @@ overviewButton.addEventListener('click', () => {
     }
 
 
-
-
-const fetchTokenIds = async (definitionId) => {
-    try {
-     
-        const formattedDefinitionId = `"${definitionId}"`;
-        
-        console.log('Fetching token IDs for Definition ID:', formattedDefinitionId);
-
-        const response = await fetch('/fetchTokenIds', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ definitionId: formattedDefinitionId }),
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            autocompleteList.innerHTML = `<li>Error: ${errorText}</li>`;
-            return;
-        }
-
-        const tokenData = await response.json();
-
-    
-    
-        autocompleteList.innerHTML = '';
-        if (tokenData.length > 0) {
-            tokenData.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `Token ID: ${item.tokenId}`;
-                listItem.classList.add('autocomplete-item');
-
-                listItem.addEventListener('click', () => {
-                    window.location.href = `/token/${item.tokenId}`;
-                });
-
-                autocompleteList.appendChild(listItem);
-            });
-        } else {
-            autocompleteList.innerHTML = '<li>No tokens found</li>';
-        }
-        autocompleteList.style.display = 'block';
-    } catch (error) {
-        console.error('Error fetching token IDs:', error);
-    }
-};
-
-
-
-
-searchInput.addEventListener('input', async (e) => {
-    const query = e.target.value.trim();
-
-    if (query.length >= 2) {
+    const fetchTokenIds = async (definitionId) => {
         try {
-            const response = await fetch(`/searchDeviceDefinitions?query=${encodeURIComponent(query)}`);
-            const results = await response.json();
-
+            const formattedDefinitionId = `"${definitionId}"`;
+            console.log('Fetching token IDs for Definition ID:', formattedDefinitionId);
+    
+            const response = await fetch('/fetchTokenIds', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ definitionId: formattedDefinitionId }),
+            });
+    
+            if (!response.ok) {
+                const errorText = await response.text();
+                autocompleteList.innerHTML = `<li>Error: ${errorText}</li>`;
+                document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if error
+                return;
+            }
+    
+            const tokenData = await response.json();
+    
             autocompleteList.innerHTML = '';
-
-            if (results && results.length > 0) {
-                results.forEach(item => {
+            if (tokenData.length > 0) {
+                document.getElementById('searchResultTitle').style.display = 'block'; // Show title when results are found
+                tokenData.forEach(item => {
                     const listItem = document.createElement('li');
-                    listItem.textContent = `${item.name} `;
+                    listItem.textContent = `Token ID: ${item.tokenId}`;
                     listItem.classList.add('autocomplete-item');
-
+    
                     listItem.addEventListener('click', () => {
-                        fetchTokenIds(item.id);
+                        window.location.href = `/token/${item.tokenId}`;
                     });
-
+    
                     autocompleteList.appendChild(listItem);
                 });
-                autocompleteList.style.display = 'block';
             } else {
-                autocompleteList.style.display = 'none';
+                autocompleteList.innerHTML = '<li>No tokens found</li>';
+                document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if no results
             }
+            autocompleteList.style.display = 'block';
         } catch (error) {
-            console.error('Error fetching autocomplete data:', error);
+            console.error('Error fetching token IDs:', error);
+            document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if error
         }
-    } else {
-        autocompleteList.style.display = 'none';
-    }
-});
- 
-    function displayTokenList(tokenList) {
-        autocompleteList.innerHTML = ''; 
-        tokenList.forEach(tokenId => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `Token ID: ${tokenId}`;
-            listItem.classList.add('autocomplete-item');
+    };
     
-            listItem.addEventListener('click', () => {
-                window.location.href = `/token/${tokenId}`;
-            });
+    searchInput.addEventListener('input', async (e) => {
+        const query = e.target.value.trim();
     
-            autocompleteList.appendChild(listItem);
-        });
-        autocompleteList.style.display = 'block';
-    }
+        if (query.length >= 2) {
+            try {
+                const response = await fetch(`/searchDeviceDefinitions?query=${encodeURIComponent(query)}`);
+                const results = await response.json();
+    
+                autocompleteList.innerHTML = '';
+    
+                if (results && results.length > 0) {
+                    results.forEach(item => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${item.name} `;
+                        listItem.classList.add('autocomplete-item');
+    
+                        listItem.addEventListener('click', () => {
+                            fetchTokenIds(item.id);
+                        });
+    
+                        autocompleteList.appendChild(listItem);
+                    });
+                    autocompleteList.style.display = 'block';
+                } else {
+                    autocompleteList.style.display = 'none';
+                    document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if no results
+                }
+            } catch (error) {
+                console.error('Error fetching autocomplete data:', error);
+                document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if error
+            }
+        } else {
+            autocompleteList.style.display = 'none';
+            document.getElementById('searchResultTitle').style.display = 'none'; // Hide title when input is cleared or less than 2 characters
+        }
+    });
+    
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', () => {

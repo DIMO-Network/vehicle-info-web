@@ -84,36 +84,37 @@
     <div id="loginPage" class="flex items-center justify-center h-screen page">
         <div class="data-container">
             <header class="flex justify-between w-full">
-                <div class="text-gray-400 text-sm">//BETA</div>
+                <div class="text-gray-400 text-sm flex items-center">
+                    //BETA
+                    <button id="githubButton" class="github-button ml-4">
+                        <i class="fa-brands fa-github"></i>
+                    </button>
+                </div>
                 <div class="text-gray-400 text-sm">v1.2</div>
-                <button id="githubButton" class="github-button">
-                    <i class="fa-brands fa-github"></i>
-                </button>
             </header>
             <main>
-                <div class="flex justify-center mb-4">
+                <div class="flex justify-center mb-2">
                     <img src="https://pbs.twimg.com/profile_images/1513193957471277067/KZe8h-tA_400x400.png" alt="DIMO Logo" class="dimo-logo">
                 </div>
                 <h1 class="text-5xl font-bold text-white">Share <br>my Car</h1>
                 <p class="text-gray-400 mt-4">Access on-chain information about any car on DIMO. <br>Enter a Token ID to get started.</p>
-                <div class="mt-12 p-4 bg-[#09090b] rounded-lg border border-gray-700">
+                <div class="mt-8 p-4 bg-[#09090b] rounded-lg border border-gray-700">
                     <label class="block mb-2 text-sm font-medium">Enter your Token ID</label>
-                    <input type="text" id="tokenInput" class="w-full p-2 bg-black rounded-md border border-gray-700" placeholder="123456">
-                    <button id="getCarDataButton" class="w-full mt-4 p-2 bg-gray-600 rounded-md text-black font-medium">Get car data</button>
+                    <input type="text" id="tokenInput" class="w-full p-2 bg-black rounded-md border border-gray-700 text-lg" placeholder="123456">
+                    <button id="getCarDataButton" class="w-full mt-4 p-2 bg-gray-600 rounded-md text-black font-medium text-lg">Get car info</button>
                 </div>
 
-              
                 <div class="search-section">
                     <label class="block mb-2 text-sm font-medium">Search for a Vehicle</label>
-                    <input type="text" id="deviceSearchInput" class="w-full p-2 bg-black rounded-md border border-gray-700" placeholder="Start typing to search...">
-                    <p class="search-result-title">Search result vehicle tokens:</p>
+                    <input type="text" id="deviceSearchInput" class="w-full p-2 bg-black rounded-md border border-gray-700 text-lg" placeholder="Start typing to search...">
+                    
+                    <p id="searchResultTitle" class="search-result-title" style="display: none;">Search result vehicle tokens:</p>
                     <ul id="autocompleteList" class="autocomplete-list"></ul>
                 </div>
 
-           
                 <div class="search-section">
                     <label class="block mb-2 text-sm font-medium">Search by Owner HEX Address</label>
-                    <input type="text" id="ownerSearchInput" class="w-full p-2 bg-black rounded-md border border-gray-700" placeholder="Enter owner address...">
+                    <input type="text" id="ownerSearchInput" class="w-full p-2 bg-black rounded-md border border-gray-700 text-lg" placeholder="0x123123123123123">
                     <ul id="ownerAutocompleteList" class="autocomplete-list"></ul>
                 </div>
             </main>

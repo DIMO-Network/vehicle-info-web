@@ -4,7 +4,7 @@ body {
     font-family: 'IBM Plex Mono', 'Inter', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
     margin: 0;
     overflow-x: hidden; 
@@ -12,11 +12,10 @@ body {
     transform-origin: top center; 
 }
 
-
-
 header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     padding: 0;
     margin-bottom: 1px;
@@ -26,8 +25,8 @@ header {
 .dimo-logo {
     width: 120px;
     height: auto;
-    margin-bottom: 0px;
-    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 main {
@@ -38,7 +37,7 @@ main {
     max-width: 400px;
     padding: 1rem;
     box-sizing: border-box;
-    margin-top: -2rem;
+    margin-top: 1rem;
 }
 
 main h1 {
@@ -46,22 +45,24 @@ main h1 {
     font-weight: bold;
     color: #fff;
     line-height: 1.2;
+    margin-top: 0.5rem;
 }
 
 main p {
     color: #888;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
 }
 
 input[type="text"] {
     width: calc(100% - 2px);
-    padding: 0.5rem;
+    padding: 0.75rem;
     background-color: #000;
     border: 1px solid #888;
     border-radius: 0.375rem;
     color: #fff;
     box-sizing: border-box;
     margin-bottom: 0.5rem;
+    font-size: 1.125rem;
 }
 
 button {
@@ -124,8 +125,6 @@ button i {
     min-height: 400px; 
 }
 
-
-
 .car-data-container,
 .advanced-car-data,
 .rewards-history-container {
@@ -141,16 +140,12 @@ button i {
     gap: 1rem;
 }
 
-
-
 .car-data-container h2,
 .advanced-car-data h2,
 .rewards-history-container h2 {
     font-size: 1.5rem;
     font-weight: bold;
 }
-
-
 
 .car-data-container p,
 .advanced-car-data p,
@@ -163,8 +158,6 @@ button i {
     text-decoration: none;
     font-size: 1rem;
 }
-
-
 
 .car-data-container .back-button {
     display: inline-block;
@@ -184,8 +177,6 @@ button i {
     background-color: #333;
     border-color: #888;
 }
-
-
 
 .autocomplete-list {
     list-style-type: none;
@@ -234,8 +225,6 @@ button i {
     color: #000;
 }
 
-
-
 .share-button, .polygon-button {
     background: transparent;
     border: 1px solid #666;
@@ -267,22 +256,20 @@ button i {
     background-color: #333;
     border-color: #888;
 }
+
 .github-button {
     position: absolute;
     top: 10px;
- 
-    right: 400px;
-    margin-top: 25px;
-    margin-right: 15px;
+    right: 10px;
     background: transparent;
-    border: 1px solid #666;
-    border-radius: 0.375rem;
+    border: none;
     padding: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
+    z-index: 10;
 }
 
 .github-button i {
