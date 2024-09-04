@@ -240,7 +240,7 @@ overviewButton.addEventListener('click', () => {
             if (!response.ok) {
                 const errorText = await response.text();
                 autocompleteList.innerHTML = `<li>Error: ${errorText}</li>`;
-                document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if error
+                document.getElementById('searchResultTitle').style.display = 'none'; 
                 return;
             }
     
@@ -248,7 +248,7 @@ overviewButton.addEventListener('click', () => {
     
             autocompleteList.innerHTML = '';
             if (tokenData.length > 0) {
-                document.getElementById('searchResultTitle').style.display = 'block'; // Show title when results are found
+                document.getElementById('searchResultTitle').style.display = 'block'; 
                 tokenData.forEach(item => {
                     const listItem = document.createElement('li');
                     listItem.textContent = `Token ID: ${item.tokenId}`;
@@ -262,12 +262,12 @@ overviewButton.addEventListener('click', () => {
                 });
             } else {
                 autocompleteList.innerHTML = '<li>No tokens found</li>';
-                document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if no results
+                document.getElementById('searchResultTitle').style.display = 'none';
             }
             autocompleteList.style.display = 'block';
         } catch (error) {
             console.error('Error fetching token IDs:', error);
-            document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if error
+            document.getElementById('searchResultTitle').style.display = 'none'; 
         }
     };
     
@@ -296,15 +296,15 @@ overviewButton.addEventListener('click', () => {
                     autocompleteList.style.display = 'block';
                 } else {
                     autocompleteList.style.display = 'none';
-                    document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if no results
+                    document.getElementById('searchResultTitle').style.display = 'none'; 
                 }
             } catch (error) {
                 console.error('Error fetching autocomplete data:', error);
-                document.getElementById('searchResultTitle').style.display = 'none'; // Hide title if error
+                document.getElementById('searchResultTitle').style.display = 'none'; 
             }
         } else {
             autocompleteList.style.display = 'none';
-            document.getElementById('searchResultTitle').style.display = 'none'; // Hide title when input is cleared or less than 2 characters
+            document.getElementById('searchResultTitle').style.display = 'none'; 
         }
     });
     
