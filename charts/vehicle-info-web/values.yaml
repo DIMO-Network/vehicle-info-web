@@ -17,7 +17,7 @@ env:
   NODE_ENV: dev
   PORT: '8080'
   LOG_LEVEL: info
-  DIMO_IDENTITY_API: https://identity-api.dev.dimo.zone
+  DIMO_IDENTITY_API: https://identity-api.dev.dimo.zone/query
 service:
   type: ClusterIP
   ports:
@@ -30,16 +30,16 @@ ports:
     containerPort: 8080
     protocol: TCP
 ingress:
-  enabled: true
+  enabled: false
   className: nginx
   annotations:
     nginx.ingress.kubernetes.io/auth-tls-secret: ingress/cf-origin-ca
     nginx.ingress.kubernetes.io/auth-tls-verify-client: 'on'
     nginx.ingress.kubernetes.io/enable-cors: 'true'
     nginx.ingress.kubernetes.io/cors-allow-origin: '*'
-    external-dns.alpha.kubernetes.io/hostname: vehicle-info.dev.dimo.zone
+    external-dns.alpha.kubernetes.io/hostname: sharemyride.dev.drivedimo.com
   hosts:
-    - host: vehicle-info.dev.dimo.zone
+    - host: sharemyride.dev.drivedimo.com
       paths:
         - path: /
           pathType: ImplementationSpecific

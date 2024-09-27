@@ -14,10 +14,10 @@ podAnnotations: {}
 podSecurityContext: {}
 securityContext: {}
 env:
-NODE_ENV: dev
+  NODE_ENV: dev
   PORT: '8080'
   LOG_LEVEL: info
-  DIMO_IDENTITY_API: https://identity-api.dimo.zone
+  DIMO_IDENTITY_API: https://identity-api.dimo.zone/query
 service:
   type: ClusterIP
   ports:
@@ -36,17 +36,17 @@ ingress:
     nginx.ingress.kubernetes.io/auth-tls-secret: ingress/cf-origin-ca
     nginx.ingress.kubernetes.io/auth-tls-verify-client: 'on'
     nginx.ingress.kubernetes.io/enable-cors: 'true'
-    nginx.ingress.kubernetes.io/cors-allow-origin: https://vehicle-info.dimo.zone
-    external-dns.alpha.kubernetes.io/hostname: vehicle-info.dimo.zone
+    nginx.ingress.kubernetes.io/cors-allow-origin: https://sharemyride.drivedimo.com
+    external-dns.alpha.kubernetes.io/hostname: sharemyride.drivedimo.com
   hosts:
-    - host: vehicle-info.dimo.zone
+    - host: sharemyride.drivedimo.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls: []
 resources:
   limits:
-    cpu: 200m
+    cpu: 150m
     memory: 256Mi
   requests:
     cpu: 50m
