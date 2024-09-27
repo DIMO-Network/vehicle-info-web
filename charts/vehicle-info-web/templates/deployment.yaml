@@ -45,8 +45,6 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ include "vehicle-info-web.fullname" . }}-config
-          - secretRef:
-              name: {{ include "vehicle-info-web.fullname" . }}-secret
           ports:
 {{ toYaml .Values.ports | indent 12 }}
           livenessProbe:
