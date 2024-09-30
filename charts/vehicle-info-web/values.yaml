@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: dimozone/vehicle-info-web
   pullPolicy: IfNotPresent
-  tag: 77df2c8
+  tag: e1685ff
 imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
